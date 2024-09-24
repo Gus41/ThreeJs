@@ -1,17 +1,17 @@
 import * as THREE from 'three';
 
 export default class Planet {
-    constructor(radius, color, orbitRadius, speed) {
+    constructor(radius, color, distance, speed) {
       this.geometry = new THREE.SphereGeometry(radius, 32, 32);
       this.material = new THREE.MeshBasicMaterial({ color: color, wireframe: true });
       this.mesh = new THREE.Mesh(this.geometry, this.material);
-      this.orbitRadius = orbitRadius;
+      this.distance = distance;
       this.speed = speed;
       this.angle = Math.random() * Math.PI * 2; // Ângulo inicial aleatório para evitar que todos comecem no mesmo lugar
   
       // Definindo a posição inicial do planeta
-      this.mesh.position.x = Math.cos(this.angle) * this.orbitRadius;
-      this.mesh.position.z = Math.sin(this.angle) * this.orbitRadius;
+      this.mesh.position.x = Math.cos(this.angle) * this.distance;
+      this.mesh.position.z = Math.sin(this.angle) * this.distance;
     }
   
     getPlanet() {
@@ -22,9 +22,8 @@ export default class Planet {
       // Atualiza o ângulo para a órbita
       this.angle += this.speed;
       
-      // Atualiza a posição de acordo com o ângulo
-      this.mesh.position.x = Math.cos(this.angle) * this.orbitRadius;
-      this.mesh.position.z = Math.sin(this.angle) * this.orbitRadius;
+      this.mesh.position.x = Math.cos(this.angle) * this.distance;
+      this.mesh.position.z = Math.sin(this.angle) * this.distance;
     }
   }
   
