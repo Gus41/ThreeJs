@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const scene = new THREE.Scene();
 
 // initialize the camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 30);
+const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 30);
 camera.position.z = 5;
 
 // initialize the renderer
@@ -13,7 +13,7 @@ const canvas = document.querySelector('canvas.threejs');
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas
 });
-renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limita o valor para 2, evitando sobrecarga em dispositivos com alta densidade de pixels
 
 // controls
 const control = new OrbitControls(camera, canvas);
