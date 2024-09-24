@@ -72,12 +72,6 @@ for(let i = 0 ; i < PLANETS.length ; i++){
   scene.add(PLANETS[i].getPlanet())
 }
 
-
-// Orbital radius and speed
-let orbitRadius = 2.5;
-let angle = 0;
-let speed = 0.01; // Speed of orbit
-
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
