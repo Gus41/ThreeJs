@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { getPlanets } from '../utils/planet';
+
+const PLANETS = getPlanets()
 
 // initialize the scene
 const scene = new THREE.Scene();
@@ -26,11 +29,11 @@ const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true 
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 
-// Smaller sphere (satellite)
-const smallSphereGeometry = new THREE.SphereGeometry(0.2, 32, 32);
-const smallSphereMaterial = new THREE.MeshBasicMaterial({ color: 'gray', wireframe: true });
-const smallSphere = new THREE.Mesh(smallSphereGeometry, smallSphereMaterial);
-scene.add(smallSphere);
+
+for(let i = 0 ; i < PLANETS.length ; i++){
+  scene.add(PLANETS[i].getPlanet())
+}
+
 
 // Orbital radius and speed
 let orbitRadius = 2.5;
@@ -46,11 +49,10 @@ window.addEventListener('resize', () => {
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const renderLoop = () => {
-  // Update orbital position
-  angle += speed;
-  smallSphere.position.x = Math.cos(angle) * orbitRadius;
-  smallSphere.position.z = Math.sin(angle) * orbitRadius;
 
+  for(let i = 0 ; i < PLANETS.length ; i++){
+    PLANETS[i].rotate()
+  }
   // Render the scene and update controls
   renderer.render(scene, camera);
   control.update();
